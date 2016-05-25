@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>GuitarSellSystem</title>
+</head>
+<body>
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">吉他销售</strong> / <small><a href="GuitarAdd.html">添加吉他</a></small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-id">序列号</th>
+                <th class="table-title">制作人</th>
+                <th class="table-type">模型</th>
+                <th class="table-author">类型</th>
+                <th class="table-set">背面材质</th>
+                <th class="table-set">顶部材质</th>
+                <th class="table-set">价格</th>
+              </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        </form>
+      </div>
+
+    </div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- js提交到后台 -->
+<script type="text/javascript">
+   	$(document).ready(function(){
+   			$.getJSON("../SearchGuitarServlet",function(jsonData){
+   				$("table tbody tr:gt(0)").remove();
+   				var html = "";
+   				var obj=jsonData[0];
+   				for(var i=0;i<obj.length;i++){
+    				html += "<tr><td>" + obj[i].serialNumber + "</td>";
+    				html += "<td>" + obj[i].builder + "</td>";
+    				html += "<td>" + obj[i].model + "</td>";
+    				html += "<td>" + obj[i].type + "</td>";
+    				html += "<td>" + obj[i].backWood + "</td>";
+    				html += "<td>" + obj[i].topWood + "</td>";
+    				html += "<td>" + obj[i].price + "</td>";
+    				html += "<td><a name=\"del\" href=\"../DelGuitarServlet?serialNumber="+obj[i].serialNumber+"\">删除</a></td></tr>";
+   				}
+   				$("table tbody").append(html);
+   				$(	"a[name='del']").click(function(){
+   					if(confirm("确定删除？")){
+   						return true; 
+   					}else{ 
+   						return false; 
+   					}
+   				});
+   			});
+   	});
+</script>
+</body>
+</html>

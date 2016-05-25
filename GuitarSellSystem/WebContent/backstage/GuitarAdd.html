@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>GuitarSellSystem</title>
+</head>
+<body>
+<div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">吉他销售</strong> / <small><a href="GuitarSearch.html">查询吉他</a></small></div>
+    </div>
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+            <div class="am-g">
+              <div class="am-u-md-4">
+              </div>
+              <div class="am-u-md-8">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+          </div>
+        </div>
+      </div>
+
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal">
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">序列号</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="serialNumber">
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">制作人</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="builder">
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">模型</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="model">
+            </div>
+          </div>
+		  
+	      <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">类型</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="type">
+            </div>
+          </div>
+		  
+		  <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">背面木质</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="backWood">
+            </div>
+          </div>
+		  
+		  <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">顶部木质</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="topWood">
+            </div>
+          </div>
+          
+           <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">价格</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="price">
+            </div>
+          </div>
+	
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <input type="button" class="am-btn am-btn-primary" id="submit" value="提交"/>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- 提交到后台 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#submit").click(function(){
+			$.get("../AddGuitarServlet?time="+new Date().getTime(),
+					{serialNumber:$("#serialNumber").val(),builder:$("#builder").val(),
+				model:$("#model").val(),type:$("#type").val(),backWood:$("#backWood").val(),
+				topWood:$("#topWood").val(),price:$("#price").val() },
+					function(data){
+						if(data==1){
+							alert("提交成功！");
+						}else{
+							alert(data);
+						}
+					});
+				});		
+			});  
+</script>
+</body>
+</html>
